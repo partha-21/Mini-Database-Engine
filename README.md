@@ -60,54 +60,6 @@ Access the studio at `http://localhost:8080`.
 
 ---
 
-## Deploying to Railway
-
-MiniDB is pre-configured for **1-click deployment on Railway**:
-
-1. Log in to [Railway](https://railway.app).
-2. Click **New Project** -> **Deploy from GitHub repo**.
-3. Select this repository: `partha-21/MYSQL-Database-Engine`.
-4. Railway will automatically detect the `Dockerfile` and `railway.json`.
-5. Once deployed, click on the service -> **Settings** -> **Networking** -> **Generate Domain** to get a public URL for your live MiniDB Studio!
-
----
-
-## SQL Dialect & Syntax
-
-```sql
--- Create tables with explicit engine selection
-CREATE TABLE users (id INT, name TEXT, age INT) USING BTREE;
-CREATE TABLE events (id INT, kind TEXT) USING LSM;
-
--- Atomic multi-row inserts
-INSERT INTO users VALUES (1, 'Alice', 30), (2, 'Bob', 25), (3, 'Charlie', 35);
-
--- Point lookups and index range scans
-SELECT * FROM users WHERE id = 2;
-SELECT name, age FROM users WHERE id >= 1 AND id <= 3 ORDER BY age DESC LIMIT 2;
-
--- Updates and Deletes
-UPDATE users SET age = 31 WHERE name = 'Alice';
-DELETE FROM users WHERE id = 3;
-
--- Aggregations
-SELECT COUNT(*) FROM users WHERE age >= 25;
-
--- Strict serializable transactions
-BEGIN;
-INSERT INTO users VALUES (4, 'Diana', 28);
-UPDATE users SET age = 29 WHERE id = 4;
-COMMIT; -- or ROLLBACK;
-
--- Planner inspections & engine diagnostics
-EXPLAIN SELECT * FROM users WHERE id >= 2 AND id <= 4;
-SHOW TABLES;
-SHOW STATS;
-CHECKPOINT;
-```
-
----
-
 ## Architecture Overview
 
 ```
