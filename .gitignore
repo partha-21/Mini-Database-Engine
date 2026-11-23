@@ -1,0 +1,7 @@
+out/
+out-test/
+sources.txt
+minidb-data/
+*.db
+*.log
+.DS_Store
